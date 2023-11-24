@@ -1,0 +1,26 @@
+system:
+  domain: chatroom
+  httpPort: "localhost:8080"
+  LocalMode: "local"
+
+redis:
+  redisHost: "127.0.0.1"
+  redisPort: "6379"
+  redisDbName: 3
+  redisNetWork: "tcp"
+  redisPassword: "example"
+
+mysql:
+  default:
+    dialect: "mysql"
+    dbHost: "127.0.0.1"
+    dbPort: "3306"
+    dbName: "chatroom"
+    userName: "root"
+    password: "example"
+    charset: "utf8mb4"
+
+local:
+  AvatarPath: "./static/imgs/avatar/"
+  DefaultAvatarPath: "/static/imgs/default.jpg"
+  DefaultVideoPath: "./static/videos/"
