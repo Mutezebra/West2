@@ -326,20 +326,7 @@ func (s *UserSrv) Update(ctx context.Context, req *types.UserUpdateReq) (resp in
 		code = e.CreateDocFailed
 		return ctl.RespError(code, err), err
 	}
-
-	data := types.UserResp{
-		ID:         user.ID,
-		UserName:   user.UserName,
-		Avatar:     user.Avatar,
-		Gender:     user.Gender,
-		NickName:   user.NickName,
-		Follow:     user.Follow,
-		Fans:       user.Fans,
-		Email:      user.Email,
-		VideoCount: model.VideoCount(user.UserName),
-	}
-
-	return ctl.RespSuccessWithData(code, data), err
+	return ctl.RespSuccessWithData(code, user), err
 }
 
 func (s *UserSrv) UpdateAvatar(ctx context.Context, avatar *multipart.FileHeader) (resp interface{}, err error) {

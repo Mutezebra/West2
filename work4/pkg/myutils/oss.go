@@ -92,3 +92,7 @@ func UploadAvatar(ctx context.Context, name string, data []byte) (*PutRet, error
 	err := formLoader.Put(ctx, ret, upToken, key, bytes.NewReader(data), length, putExtra)
 	return ret, err, key
 }
+
+func DownLoadAvatar() {
+
+}

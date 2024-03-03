@@ -15,7 +15,6 @@ type Claims struct {
 
 // CheckToken 用于jwt中间件里检查token
 func CheckToken(aToken, rToken string) (newAToken, newRToken string, err error) {
-
 	aClaims, err, aValid := ParseToken(aToken)
 	if err != nil {
 		log.LogrusObj.Println("atoken", err)

@@ -66,6 +66,5 @@ func CleanVideoInfo() {
 		}
 		d.Ack(false) // 手动传递消息确认
 	}
-
 	log.LogrusObj.Infoln("The clean goroutine over")
 }

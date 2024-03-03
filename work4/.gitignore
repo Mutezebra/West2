@@ -15,9 +15,11 @@
 # vendor/
 uploadfile
 
-
 runtime
-go.sum
 sql
 logs
-static
+test.go
+repository/es/plugins/ik
+static/imgs/qr-code
+static/imgs/avatar
+static/videos

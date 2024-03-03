@@ -1,37 +1,34 @@
-version: '1.0'
+version: '3.7'
 
 networks:
   videoWebSite:
-    external: true
-    name: videoWebSite
+    driver: bridge
 
 services:
   mysql:
     container_name: db
-    image: mysql:5.7
+    image: mysql:latest
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_ROOT_PASSWORD=88888888
       - MYSQL_DATABASE=videowebsite
       - TZ=Asia/Shanghai
     ports:
       - "3306:3306"
     networks:
-      videoWebSite:
-        ipv4_address: 172.31.0.2
+      - videoWebSite
 
   redis:
     container_name: redis
     image: redis:latest
-    restart: always
+    restart: on-failure
     volumes:
       - /usr/local/redis:/usr/local/redis
     ports:
       - "6379:6379"
-    command: redis-server --requirepass 123456
+    command: redis-server --requirepass 88888888
     networks:
-      videoWebSite:
-        ipv4_address: 172.31.0.3
+      - videoWebSite
 
   elasticsearch:
     image: elasticsearch:8.9.0
@@ -40,16 +37,16 @@ services:
       - cluster.name=elasticsearch #设置集群名称为elasticsearch
       - discovery.type=single-node #以单一节点模式启动
       - ES_JAVA_OPTS=-Xms256m -Xmx1024m #设置使用jvm内存大小
-      - ELASTIC_PASSWORD=123456   #密码
+      - ELASTIC_PASSWORD=88888888-elasticsearch   #密码
       - xpack.security.enabled=true
     volumes:
       - /usr/local/elasticsearch/data:/usr/local/elasticsearch/data
+      - ./repository/es/plugins/ik:/usr/share/elasticsearch/plugins/ik
     ports:
       - "9200:9200"
     restart: always
     networks:
-      videoWebSite:
-        ipv4_address: 172.31.0.9
+      - videoWebSite
 
 #  kibana:
 #    image: kibana:8.9.0
@@ -57,28 +54,26 @@ services:
 #    environment:
 #      - elasticsearch.hosts=http://es:9200 #设置访问elasticsearch的地址
 #      - ELASTICSEARCH_USERNAME=kibana_system
-#      - ELASTICSEARCH_PASSWORD=123456  #elastic密码
+#      - ELASTICSEARCH_PASSWORD=88888888  #elastic密码
 #      - I18N_LOCALE=zh-CN          #中文
 #    ports:
 #      - "5601:5601"
 #    depends_on:
 #      - elasticsearch
 #    networks:
-#      videoWebSite:
-#        ipv4_address: 172.31.0.5
+  #    - videoWebSite
 
   rabbitmq:
     image: rabbitmq:latest
     container_name: rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=mutezebra
-      - RABBITMQ_DEFAULT_PASS=Mute0919..
+      - RABBITMQ_DEFAULT_PASS=88888888
     ports:
       - "5672:5672"
     restart: always
     networks:
-      videoWebSite:
-        ipv4_address: 172.31.0.10
+      - videoWebSite
 
   web:
     build: .
@@ -86,9 +81,10 @@ services:
     depends_on:
       - mysql
       - redis
+    volumes:
+      - ./logs:/app/logs
     ports:
-      - "8080:9090"
+      - "8000:8000"
     restart: always
     networks:
-      videoWebSite:
-        ipv4_address: 172.31.0.6
+      - videoWebSite

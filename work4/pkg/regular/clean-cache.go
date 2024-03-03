@@ -16,12 +16,10 @@ func CleanVideoRegular() {
 		time.Sleep(consts.RegularClean)
 		now := time.Now().Unix()
 		// 获取所有的key
-		keys, err := cache.RedisClient.Keys("info:video:*").Result()
-		if err != nil {
-			log.LogrusObj.Errorln("Error getting keys:", err)
+		keys, _ := cache.RedisClient.Keys("info:video:*").Result()
+		if len(keys) == 0 {
 			continue
 		}
-
 		// 遍历每一个 key 进行清理或者更新
 		for _, key := range keys {
 			split := strings.Split(key, ":")

@@ -1,1 +1,23 @@
-# 文档地址 https://o0e45m7p53e.feishu.cn/docx/MpHudivodocnCzxsRA4cR7U1nRN
+## 项目规划
+- [x] 部署上线
+- [x] 编写接口文档与目录树
+- [x] 搜索条件可以同时支持大于等于4个的条件筛选
+- [x] 使用oss
+- [x] 引入2FA
+- [x] 大视频分片处理
+- [x] 加入管理员
+- [x] 搜索功能使用es实现
+- [ ] 将打印日志的操作转移到service层
+- [ ] 将service层中逻辑重复的地方抽象成函数封装
+- [ ] service层优化error处理逻辑
+- [ ] 将所有errors.New常量化
+- [x] 引入消息队列
+- [ ] 将Redis连接的获取转换成一个函数。
+- [x] 部分redis数据集成进mysql
+- [x] 增加一个userInfo功能
+- [ ] 查看头像功能
+- [ ] 修改之前的缓存逻辑，都设置上过期时间，拒绝永久缓存。
+- [ ] 增加search分页功能
+- [x] 获取视频等接口使用Redis缓存数据，视频信息。
+- [x] 项目启动的时候启动一个goroutine来更新和销毁redis数据。
+- [x] 在上一个target的基础上引入rabbitmq来实现异步操作进行redis->mysql的数据同步。

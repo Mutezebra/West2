@@ -2,6 +2,7 @@ package index
 
 import (
 	"context"
+	"fmt"
 	"four/pkg/log"
 	"four/repository/es"
 	"four/repository/es/model"
@@ -31,6 +32,7 @@ func InitIndex() {
 	if !exist {
 		err := IndexCreate(u)
 		if err != nil {
+			fmt.Println("!!!!!", err)
 			log.LogrusObj.Panic(err)
 		}
 	}
@@ -38,6 +40,7 @@ func InitIndex() {
 	if !exist {
 		err := IndexCreate(v)
 		if err != nil {
+			fmt.Println("!!!!!", err)
 			log.LogrusObj.Panic(err)
 		}
 	}

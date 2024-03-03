@@ -2,17 +2,13 @@ package route
 
 import (
 	"context"
-	"fmt"
 	"four/api"
 	"four/config"
 	"four/consts"
 	"four/middleware"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/server"
-	"github.com/cloudwego/hertz/pkg/protocol/http1/resp"
 	"net/http"
-	"strings"
-	"time"
 )
 
 func NewRouter() *server.Hertz {
@@ -39,16 +35,6 @@ func NewRouter() *server.Hertz {
 		// 基础搜索
 		v1.POST("search", api.Search())
 		v1.POST("search/filter", api.FilterHandle())
-		v1.GET("flush/chunk", func(c context.Context, ctx *app.RequestContext) {
-			// Hijack the writer of Response
-			ctx.Response.HijackWriter(resp.NewChunkedBodyWriter(&ctx.Response, ctx.GetWriter()))
-
-			for i := 0; i < 100; i++ {
-				ctx.Write([]byte(fmt.Sprintf("chunk %d: %s\n", i, strings.Repeat("hi~", i)))) // nolint: errcheck
-				ctx.Flush()                                                                   // nolint: errcheck
-				time.Sleep(1 * time.Second)
-			}
-		})
 	}
 
 	auth := v1.Group("/")

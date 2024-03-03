@@ -49,7 +49,7 @@ func setOutPutFile() (*os.File, error) {
 	now := time.Now()
 	logFilePath := ""
 	if dir, err := os.Getwd(); err == nil {
-		logFilePath = dir + "/logs/"
+		logFilePath = dir + "/logs"
 	}
 	_, err := os.Stat(logFilePath)
 	if os.IsNotExist(err) {

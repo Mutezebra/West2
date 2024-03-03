@@ -1,55 +1,56 @@
 system:
   domain: VideoWebsite
-  httpPort: "localhost:8080"
-  LocalMode: "local"  #可以切换到oss
+  httpPort: "0.0.0.0:8000"
+  LocalMode: "local"
 
 redis:
-  redisHost: "127.0.0.1"
+  redisHost: "redis"
   redisPort: "6379"
   redisDbName: 0
   redisNetWork: "tcp"
-  redisPassword: "123456"
+  redisPassword: "88888888"
 
 mysql:
   default:
     dialect: "mysql"
-    dbHost: "127.0.0.1"
+    dbHost: "db"
     dbPort: "3306"
     dbName: "videowebsite"
     userName: "root"
-    password: "123456"
+    password: "88888888"
     charset: "utf8mb4"
 
 local:
-  AvatarPath: "./static/imgs/avatar/"
-  DefaultAvatarPath: "/static/imgs/default.jpg"
-  DefaultVideoPath: "./static/videos/"
+  AvatarPath: "/static/imgs/avatar/"
+  DefaultAvatarPath: "/static/imgs/default.png"
+  DefaultVideoPath: "/static/videos/"
+  QRCodePath: "/static/imgs/qr-code"
 
 email:
   qqmail:
-    sender: "example@qq.com"
+    sender: "mutezebra@qq.com"
     host: "smtp.qq.com"
-    password: "examplepassword"
+    password: ""
     address: "smtp.qq.com:25"
 
 es:
   userName: "elastic"
-  password: "123456"
-  address: "https://127.0.0.1:9200"
-
+  password: "88888888-elasticsearch"
+  address: "http://es:9200"
 
 qiniu:
   AccessKey: ""
   SecretKey: ""
-  AvatarPath: "static/avatars/"
+  AvatarPath: "static/avatar/"
   VideoPath: "static/videos/"
-  DefaultAvatarPath: "stastic/avatars/default.jpg"
-  Bucket: ""
+  DefaultAvatarPath: "static/avatar/default.png"
+  Bucket: "videowebsite"
   Domain: ""
+
 
 rabbitmq:
   RabbitMQ: "amqp"
-  RabbitMQUser: "guest"
-  RabbitMQPassWord: "guest"
-  RabbitMQHost: rabbitmq
+  RabbitMQUser: "mutezebra"
+  RabbitMQPassWord: "88888888"
+  RabbitMQHost: "rabbitmq"
   RabbitMQPort: "5672"

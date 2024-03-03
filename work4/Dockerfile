@@ -5,7 +5,8 @@ ENV GO111MODULE=on \
 
 WORKDIR /app
 COPY . .
-RUN go mod tidy
+RUN --mount=type=cache,mode=0777,id=go-mode,target=/go/pkg/mod \
+    go mod tidy
 
 RUN CGO_ENABLED=0 GOOS=linux go build  -ldflags="-w -s" -o ./main
 WORKDIR /app
@@ -22,6 +23,6 @@ WORKDIR /app
 COPY --from=builder /app/publish .
 
 # 指定运行时环境变量
-EXPOSE 9090
+EXPOSE 8000
 
 ENTRYPOINT ["./main"]
