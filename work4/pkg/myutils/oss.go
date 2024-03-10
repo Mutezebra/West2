@@ -39,7 +39,7 @@ func UploadVideo(ctx context.Context, name string, data []byte) (*PutRet, error)
 	upToken := putPolicy.UploadToken(mac)
 
 	cfg := storage.Config{}
-
+	cfg.Region = &storage.ZoneHuadong
 	resumeUploader := storage.NewResumeUploaderV2(&cfg)
 
 	putExtra := storage.RputV2Extra{PartSize: 2 * consts.MB}
@@ -83,7 +83,7 @@ func UploadAvatar(ctx context.Context, name string, data []byte) (*PutRet, error
 	}
 	upToken := putPolicy.UploadToken(mac)
 
-	formLoader := storage.NewFormUploader(&storage.Config{Region: &storage.ZoneHuadongZheJiang2})
+	formLoader := storage.NewFormUploader(&storage.Config{Region: &storage.ZoneHuadong})
 
 	ret := &PutRet{}
 	putExtra := &storage.PutExtra{}
