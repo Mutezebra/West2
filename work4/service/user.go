@@ -370,6 +370,7 @@ func (s *UserSrv) UpdateAvatar(ctx context.Context, avatar *multipart.FileHeader
 		_, err, path = myutils.UploadAvatar(ctx, name, data)
 		if err != nil {
 			code = e.OSSUploadVideoFailed
+			return ctl.RespError(code, err), err
 		}
 	}
 	err = userDao.UpdateAvatar(user, path)
