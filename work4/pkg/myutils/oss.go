@@ -3,7 +3,6 @@ package myutils
 import (
 	"bytes"
 	"context"
-	"errors"
 	"fmt"
 	"four/config"
 	"four/consts"
@@ -39,12 +38,8 @@ func UploadVideo(ctx context.Context, name string, data []byte) (*PutRet, error)
 	}
 	upToken := putPolicy.UploadToken(mac)
 
-	cfg := storage.Config{Zone: &storage.ZoneHuadong}
-	region, ok := storage.GetRegionByID(storage.RIDHuadong)
-	if !ok {
-		return nil, errors.New("failed get storage region")
-	}
-	cfg.Region = &region
+	cfg := storage.Config{}
+
 	resumeUploader := storage.NewResumeUploaderV2(&cfg)
 
 	putExtra := storage.RputV2Extra{PartSize: 2 * consts.MB}
